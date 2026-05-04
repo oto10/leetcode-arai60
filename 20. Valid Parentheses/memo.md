@@ -41,3 +41,26 @@ class Solution:
 
 # Step3
 10分以内に3回連続でエラーを出さずに書いてアクセプトされた。
+
+# コードレビューでのフィードバックをもとに改善したコード
+```python
+class Solution:
+    def isValid(self, s: str) -> bool:
+        open_brackets = []
+        open_to_close = {
+            "(": ")",
+            "{": "}",
+            "[": "]",
+        }
+
+        for bracket in s:
+            if bracket in open_to_close.keys():
+                open_brackets.append(bracket)
+            for opening_bracket in open_to_close.keys():
+                if bracket == open_to_close[opening_bracket]:
+                    if not open_brackets or open_brackets[-1] != opening_bracket:
+                        return False
+                    open_brackets.pop()
+
+        return not open_brackets
+```
