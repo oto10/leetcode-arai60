@@ -12,3 +12,23 @@
 
 # Step3
 - 10分以内に3回連続でエラーを出さずに書いてアクセプトされた。
+
+# ポインタを用いて先頭から reverse する解法
+```python
+# Definition for singly-linked list.
+# class ListNode:
+#     def __init__(self, val=0, next=None):
+#         self.val = val
+#         self.next = next
+class Solution:
+    def reverseList(self, head: Optional[ListNode]) -> Optional[ListNode]:
+        node = head
+        prev = None
+        while node is not None:
+            next = node.next
+            node.next = prev
+            prev = node
+            node = next
+
+        return prev
+```
