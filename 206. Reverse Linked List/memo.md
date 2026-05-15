@@ -1,0 +1,34 @@
+# Step1
+
+- 問題が LIFO なので、 Stack が使えそうである。
+- データ構造は配列などに一旦崩そうとせず、 Linked List として処理する。
+- 与えられた Linked List を Stack にすべて pushした後で、末尾のノードから後続のノードを繋ぎ合わせていけば良い。
+- ノードは末尾まで走査するため、時間計算量は O(n) である。
+- 10分以内に書いてアクセプトされた。
+
+# Step2
+- 与えられた Linked List が None かどうかの判定を、最初に実施するよう変更した。
+- Linked List を逆順にする箇所の while ループを for ループに変更した。ループ内ではインデックスを使わないという意味を込めて、for 文で受ける変数名は i ではなく _ にした。
+
+# Step3
+- 10分以内に3回連続でエラーを出さずに書いてアクセプトされた。
+
+# ポインタを用いて先頭から reverse する解法
+```python
+# Definition for singly-linked list.
+# class ListNode:
+#     def __init__(self, val=0, next=None):
+#         self.val = val
+#         self.next = next
+class Solution:
+    def reverseList(self, head: Optional[ListNode]) -> Optional[ListNode]:
+        node = head
+        prev = None
+        while node is not None:
+            next = node.next
+            node.next = prev
+            prev = node
+            node = next
+
+        return prev
+```
