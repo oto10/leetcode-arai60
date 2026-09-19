@@ -5,23 +5,25 @@ class Solution:
         num_islands = 0
         visited = set()
 
-        def dfs(i, j):
-            if i < 0 or j < 0 or i >= num_rows or j >= num_cols:
+        def traverse(r, c):
+            if not (
+                0 <= r < num_rows
+                and 0 <= c < num_cols
+                and (r, c) not in visited
+                and grid[r][c] == "1"
+            ):
                 return
 
-            if grid[i][j] == "0" or (i, j) in visited:
-                return
+            visited.add((r, c))
+            traverse(r - 1, c)
+            traverse(r + 1, c)
+            traverse(r, c - 1)
+            traverse(r, c + 1)
 
-            visited.add((i, j))
-            dfs(i - 1, j)
-            dfs(i + 1, j)
-            dfs(i, j - 1)
-            dfs(i, j + 1)
-
-        for i in range(num_rows):
-            for j in range(num_cols):
-                if grid[i][j] == "1" and (i, j) not in visited:
+        for r in range(num_rows):
+            for c in range(num_cols):
+                if grid[r][c] == "1" and (r, c) not in visited:
                     num_islands += 1
-                    dfs(i, j)
+                    traverse(r, c)
 
         return num_islands
